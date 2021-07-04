@@ -4,7 +4,7 @@ import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import BestBooks from './BestBooks'
 import { withAuth0 } from '@auth0/auth0-react';
-import Login from './Login';
+import LoginButton from './LoginButton';
 import BrowserRouter from './BrowserRouter';
 import Profile from './Profile'
 

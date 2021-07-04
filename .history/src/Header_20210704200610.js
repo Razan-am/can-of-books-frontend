@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import './Header.css';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
-import { withAuth0 } from '@auth0/auth0-react';
 
 
 class Header extends React.Component {
@@ -26,4 +25,4 @@ class Header extends React.Component {
   }
 }
 
-export default withAuth0(Header);
+export default Header;
