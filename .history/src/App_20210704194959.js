@@ -14,6 +14,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -31,7 +32,7 @@ class App extends React.Component {
                 {
                   this.props.auth0.isAuthenticated ?
                     <BestBooks />
-                    :<Login/>
+                    :<Profile/>
                 }
               </Route>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
