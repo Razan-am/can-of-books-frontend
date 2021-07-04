@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { withAuth0 } from '@auth0/auth0-react';
+import React, { Component } from 'react'
 
 
-class Profile extends Component {
+export class Profile extends Component {
     render() {
         return (
             <div>
@@ -22,4 +21,4 @@ class Profile extends Component {
     }
 }
 
-export default withAuth0(Profile);
+export default Profile
