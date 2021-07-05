@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Link } from "react-router-dom";
 import './Header.css';
-import LogoutButton from './LogoutButton';
+import LogoutButton from './components/LogoutButton';
 
 
 class Header extends React.Component {
