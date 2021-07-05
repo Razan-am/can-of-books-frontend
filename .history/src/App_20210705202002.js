@@ -11,7 +11,7 @@ import {
 
 import { withAuth0 } from '@auth0/auth0-react';
 import BestBooks from './BestBooks'
-import Login from './components/Login';
+import Login from './Login';
 import BrowserRouter from './components/BrowserRouter';
 import Profile from './components/Profile'
 class App extends React.Component {
@@ -40,6 +40,7 @@ class App extends React.Component {
             </Switch>
             <Footer />
           </IsLoadingAndError>
+          {/* <Profile/> */}
         </Router>
       </>
     );

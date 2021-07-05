@@ -40,6 +40,7 @@ class App extends React.Component {
             </Switch>
             <Footer />
           </IsLoadingAndError>
+          {/* <Profile/> */}
         </Router>
       </>
     );
