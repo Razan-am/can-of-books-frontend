@@ -17,6 +17,7 @@ import Profile from './Profile'
 class App extends React.Component {
 
   render() {
+    const user = this.props.user
     console.log('app', this.props);
     return (
       <>

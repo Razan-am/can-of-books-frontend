@@ -17,6 +17,7 @@ import Profile from './Profile'
 class App extends React.Component {
 
   render() {
+    const user = this.props.user
     console.log('app', this.props);
     return (
       <>
@@ -33,8 +34,9 @@ class App extends React.Component {
                 }
               </Route>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-              <Route exact path='/profile'>
-                    <Profile/>
+              <Route exact path='/profile'>{
+              this.props.auth0.isAuthenticated ?
+                    <Profile userInfo={user}/>:''}
                 </Route>
               <BrowserRouter/>
             </Switch>
