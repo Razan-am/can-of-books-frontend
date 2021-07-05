@@ -1,9 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-// import { withAuth0 } from '@auth0/auth0-react';
 import './BestBooks.css';
-import axios from 'axios';
+import axios from './axios';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class MyFavoriteBooks extends React.Component {
@@ -15,7 +14,7 @@ class MyFavoriteBooks extends React.Component {
           const config = {
             headers: { "Authorization": `Bearer ${jwt}` },
             method: 'get',
-            baseURL: 'http://localhost:8080',
+            baseURL: process.env.REACT_LOCAL_HOST,
             url: '/authorize'
           }
           axios(config)
