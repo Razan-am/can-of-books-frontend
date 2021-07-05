@@ -13,7 +13,7 @@ class Profile extends Component {
                         headers: { "Authorization": `Bearer ${jwt}` },
                         method: 'get',
                         baseURL: process.env.REACT_LOCAL_HOST,
-                        url: '/authorize'
+                        url: 'https://can-of-books-a.herokuapp.com/authorize'
                     }
                     axios(config)
                         .then(axiosResults => console.log(axiosResults.data))

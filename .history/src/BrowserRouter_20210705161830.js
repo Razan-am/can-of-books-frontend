@@ -11,6 +11,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import LoginButton from './LoginButton';
 
 class BrowserRouter extends Component {
     render() {
