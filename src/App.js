@@ -16,11 +16,15 @@ import {
   Route,
 } from "react-router-dom";
 
-class App extends React.Component {
 
+class App extends React.Component {
+  
   render() {
-    console.log('app', this.props);
+    // const{user, isAuthenticated}=this.props.auth0
+    
+    // console.log('app', this.props);
     return (
+      
       <>
         <Router>
           <IsLoadingAndError>
@@ -35,10 +39,10 @@ class App extends React.Component {
                 }
               </Route>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-              <Route exact path='/profile'>
+              <Route exact path='/profile'  >
                     <Profile/>
                 </Route>
-              <BrowserRouter/>
+              {/* <BrowserRouter/> */}
             </Switch>
             <Footer />
           </IsLoadingAndError>
