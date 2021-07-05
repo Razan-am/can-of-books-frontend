@@ -12,7 +12,7 @@ class Profile extends Component {
                     const config = {
                         headers: { "Authorization": `Bearer ${jwt}` },
                         method: 'get',
-                        baseURL: process.env.REACT_APP_LOCAL_HOST,
+                        baseURL: process.env.REACT_AUTH0_DOMAIN,
                         url: '/authorize'
                     }
                     axios(config)

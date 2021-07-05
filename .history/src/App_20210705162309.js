@@ -10,20 +10,16 @@ import {
 } from "react-router-dom";
 
 import { withAuth0 } from '@auth0/auth0-react';
-import Profile from './Profile'
 import BestBooks from './BestBooks'
-import LogoutButton from './LogoutButton';
 import Login from './Login';
-// import BrowserRouter from './BrowserRouter';
-
+import BrowserRouter from './BrowserRouter';
+import Profile from './Profile'
 class App extends React.Component {
-  
+
   render() {
-    const{user, isAuthenticated}=this.props.auth0
-    
-    // console.log('app', this.props);
+    const user = this.props.user
+    console.log('app', this.props);
     return (
-      
       <>
         <Router>
           <IsLoadingAndError>
@@ -33,11 +29,15 @@ class App extends React.Component {
                 {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
                 {
                   this.props.auth0.isAuthenticated ?
-                    <BestBooks />:<Login/>
+                    <BestBooks />
+                    :<Login/>
                 }
               </Route>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-              <Route path="/profile">{this.props.auth0.isAuthenticated && <Profile/> }</Route>
+              <Route exact path='/profile'>
+                    <Profile/>
+                </Route>
+              <BrowserRouter/>
             </Switch>
             <Footer />
           </IsLoadingAndError>

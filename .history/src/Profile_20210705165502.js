@@ -12,8 +12,8 @@ class Profile extends Component {
                     const config = {
                         headers: { "Authorization": `Bearer ${jwt}` },
                         method: 'get',
-                        baseURL: process.env.REACT_APP_LOCAL_HOST,
-                        url: '/authorize'
+                        baseURL: process.env.REACT_LOCAL_HOST,
+                        url: 'https://can-of-books-a.herokuapp.com/authorize'
                     }
                     axios(config)
                         .then(axiosResults => console.log(axiosResults.data))
