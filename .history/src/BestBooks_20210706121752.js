@@ -36,7 +36,7 @@ class MyFavoriteBooks extends React.Component {
     axios.get(url).then(response =>{
       console.log(response.data);
       this.setState({
-        listOfBook:response.data
+        listOfBook
       })
     })
   }
@@ -51,9 +51,7 @@ class MyFavoriteBooks extends React.Component {
         <ol>
         {
           this.state.listOfBook.map(book =>{
-            return <>
-             <li>{book.name},{book.description},{book.status}</li>
-            </>
+            return <li>{book.name}</li>
           })
         }
         </ol>
