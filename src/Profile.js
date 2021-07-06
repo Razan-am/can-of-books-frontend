@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 class Profile extends Component {
-    componentDidMount = () => {
+    componentDidMount = async() => {
         if (this.props.auth0.isAuthenticated) {
             this.props.auth0.getIdTokenClaims()
                 .then(res => {
