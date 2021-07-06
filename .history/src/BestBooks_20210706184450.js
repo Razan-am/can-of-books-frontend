@@ -33,8 +33,7 @@ class MyFavoriteBooks extends React.Component {
   // }
   
   componentDidMount = () => {
-    let email = this.props.auth0.user.email
-    const url=`http://localhost:8080/books?${email}`;
+    const url=`http://localhost:8080/books?email=razanalamleh@gmail.com`;
     axios.get(url).then(response =>{
       console.log(response.data);
       this.setState({
