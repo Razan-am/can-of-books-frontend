@@ -4,11 +4,12 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import './BestBooks.css';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
+
 class MyFavoriteBooks extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state={
-      listOfBook:[]
+      listOfBook:[],
     }
   }
   componentDidMount = () => {
@@ -29,9 +30,10 @@ class MyFavoriteBooks extends React.Component {
         .catch(err => console.error(err));
     }
   }
+  
   componentDidMount = () => {
-    let email=this.props.auth0.user.email
-    const url=`http://localhost:8080/books?email=${email}`;
+    let email = this.props.auth0.user.email
+    const url=`http://localhost:8080/books?${email}`;
     axios.get(url).then(response =>{
       console.log(response.data);
       this.setState({
@@ -39,6 +41,7 @@ class MyFavoriteBooks extends React.Component {
       })
     })
   }
+
   render() {
     return (
       <Jumbotron>
@@ -47,16 +50,17 @@ class MyFavoriteBooks extends React.Component {
           This is a collection of my favorite books
         </p>
         <ol>
-        {
+        {/* {
           this.state.listOfBook.map(book =>{
             return <>
              <li>{book.name},{book.description},{book.status}</li>
             </>
           })
-        }
+        } */}
         </ol>
       </Jumbotron>
     )
   }
 }
+
 export default withAuth0(MyFavoriteBooks);
