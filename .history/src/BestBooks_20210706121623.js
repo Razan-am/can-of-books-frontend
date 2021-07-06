@@ -35,9 +35,6 @@ class MyFavoriteBooks extends React.Component {
     const url=`http://localhost:8080/books?email=razanalamleh@gmail.com`;
     axios.get(url).then(response =>{
       console.log(response.data);
-      this.setState({
-        listOfBook:response.data
-      })
     })
   }
 
@@ -51,9 +48,7 @@ class MyFavoriteBooks extends React.Component {
         <ol>
         {
           this.state.listOfBook.map(book =>{
-            return <>
-             <li>{book.name},{book.description},{book.status}</li>
-            </>
+            return <li>{book.name}</li>
           })
         }
         </ol>
