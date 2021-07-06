@@ -4,34 +4,36 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import './BestBooks.css';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
+
 class MyFavoriteBooks extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state={
-      listOfBook:[]
+      listOfBook:[],
     }
   }
+  // componentDidMount = () => {
+  //   if (this.props.auth0.isAuthenticated) {
+  //     this.props.auth0.getIdTokenClaims()
+  //       .then(res => {
+  //         const jwt = res.__raw;
+  //         const config = {
+  //           headers: { "Authorization": `Bearer ${jwt}` },
+  //           method: 'get',
+  //           baseURL: 'http://localhost:8080',
+  //           url: '/authorize'
+  //         }
+  //         axios(config)
+  //           .then(axiosResults => console.log(axiosResults.data))
+  //           .catch(err => console.error(err));
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
+  // }
+  
   componentDidMount = () => {
-    if (this.props.auth0.isAuthenticated) {
-      this.props.auth0.getIdTokenClaims()
-        .then(res => {
-          const jwt = res.__raw;
-          const config = {
-            headers: { "Authorization": `Bearer ${jwt}` },
-            method: 'get',
-            baseURL: 'http://localhost:8080',
-            url: '/authorize'
-          }
-          axios(config)
-            .then(axiosResults => console.log(axiosResults.data))
-            .catch(err => console.error(err));
-        })
-        .catch(err => console.error(err));
-    }
-  }
-  componentDidMount = () => {
-    let email=this.props.auth0.user.email
-    const url=`http://localhost:8080/books?email=${email}`;
+    let email = this.props.auth0.user.email
+    const url=`http://localhost:8080/books?razanalamleh@gmail.com`;
     axios.get(url).then(response =>{
       console.log(response.data);
       this.setState({
@@ -39,6 +41,7 @@ class MyFavoriteBooks extends React.Component {
       })
     })
   }
+
   render() {
     return (
       <Jumbotron>
@@ -59,4 +62,5 @@ class MyFavoriteBooks extends React.Component {
     )
   }
 }
+
 export default withAuth0(MyFavoriteBooks);
