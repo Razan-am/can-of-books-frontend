@@ -6,39 +6,40 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class MyFavoriteBooks extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      listOfBook:[]
+      listOfBook:[],
+      email:' ',
     }
   }
-  componentDidMount = () => {
-    if (this.props.auth0.isAuthenticated) {
-      this.props.auth0.getIdTokenClaims()
-        .then(res => {
-          const jwt = res.__raw;
-          const config = {
-            headers: { "Authorization": `Bearer ${jwt}` },
-            method: 'get',
-            baseURL: 'http://localhost:8080',
-            url: '/authorize'
-          }
-          axios(config)
-            .then(axiosResults => console.log(axiosResults.data))
-            .catch(err => console.error(err));
-        })
-        .catch(err => console.error(err));
-    }
-  }
+
+  // componentDidMount = () => {
+  //   if (this.props.auth0.isAuthenticated) {
+  //     this.props.auth0.getIdTokenClaims()
+  //       .then(res => {
+  //         const jwt = res.__raw;
+  //         const config = {
+  //           headers: { "Authorization": `Bearer ${jwt}` },
+  //           method: 'get',
+  //           baseURL: 'http://localhost:8080',
+  //           url: '/authorize'
+  //         }
+  //         axios(config)
+  //           .then(axiosResults => console.log(axiosResults.data))
+  //           .catch(err => console.error(err));
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
+  // }
   
-  componentDidMount = () => {
-    const url=`http://localhost:8080/books?email=razanalamleh@gmail.com`;
-    axios.get(url).then(response =>{
-      console.log(response.data);
+  componentDidMount = async () => {
+    const url=`http://localhost:8080/books?email=munther.abdlrahman@gmail.com`;
+    let axiosaData=await axios.get(url)
       this.setState({
-        listOfBook:response.data
+        listOfBook:axiosaData.data.book
       })
-    })
+    
   }
 
   render() {
@@ -49,11 +50,13 @@ class MyFavoriteBooks extends React.Component {
           This is a collection of my favorite books
         </p>
         <ol>
+        
         {
-          this.state.listOfBook.map(book =>{
-            return <>
+          this.state.listOfBook.map((book)=>{
+            return
+            <>
              <li>{book.name},{book.description},{book.status}</li>
-            </>
+             </>
           })
         }
         </ol>
