@@ -6,12 +6,6 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class MyFavoriteBooks extends React.Component {
-  constructor(){
-    super();
-    this.state={
-      listOfBook:[]
-    }
-  }
   componentDidMount = () => {
     if (this.props.auth0.isAuthenticated) {
       this.props.auth0.getIdTokenClaims()
@@ -20,7 +14,7 @@ class MyFavoriteBooks extends React.Component {
           const config = {
             headers: { "Authorization": `Bearer ${jwt}` },
             method: 'get',
-            baseURL: 'http://localhost:8080',
+            baseURL: 'http://localhost:8000',
             url: '/authorize'
           }
           axios(config)
@@ -30,16 +24,7 @@ class MyFavoriteBooks extends React.Component {
         .catch(err => console.error(err));
     }
   }
-  
-  componentDidMount = () => {
-    const url=`http://localhost:8080/books?email=razanalamleh@gmail.com`;
-    axios.get(url).then(response =>{
-      console.log(response.data);
-      this.setState({
-        listOfBook:response.data
-      })
-    })
-  }
+
 
   render() {
     return (
@@ -48,15 +33,6 @@ class MyFavoriteBooks extends React.Component {
         <p>
           This is a collection of my favorite books
         </p>
-        <ol>
-        {
-          this.state.listOfBook.map(book =>{
-            return <>
-             <li>{book.name},{book.description},{book.status}</li>
-            </>
-          })
-        }
-        </ol>
       </Jumbotron>
     )
   }

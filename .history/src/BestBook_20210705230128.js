@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
 
-class Profile extends Component {
+class BestBook extends Component {
     componentDidMount = () => {
         if (this.props.auth0.isAuthenticated) {
             this.props.auth0.getIdTokenClaims()
@@ -12,8 +11,8 @@ class Profile extends Component {
                     const config = {
                         headers: { "Authorization": `Bearer ${jwt}` },
                         method: 'get',
-                        baseURL: 'http://localhost:8080',
-                        url: '/authorize'
+                        baseURL: process.env.REACT_APP_LOCAL_HOST,
+                        url: '/books'
                     }
                     axios(config)
                         .then(axiosResults => console.log(axiosResults.data))
@@ -24,21 +23,11 @@ class Profile extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>Hello, welcome to our librery books</h1>
-                {
-                    this.props.auth0.isAuthenticated &&
-                    <>
-                        <h1>{this.props.auth0.user.name}</h1>
-                        <img src={this.props.auth0.user.picture} alt={this.props.auth0.user.name} />
-                        <h1>{this.props.auth0.user.email}</h1>
-                    </>
-
-                }
-
-            </div>
+            <>
+                
+            </>
         )
     }
 }
 
-export default withAuth0(Profile);
+export default BestBook;

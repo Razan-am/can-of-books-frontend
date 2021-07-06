@@ -51,9 +51,11 @@ class MyFavoriteBooks extends React.Component {
         <ol>
         {
           this.state.listOfBook.map(book =>{
+            if(book >0){
             return <>
              <li>{book.name},{book.description},{book.status}</li>
             </>
+            }
           })
         }
         </ol>

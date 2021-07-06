@@ -12,18 +12,21 @@ import {
 import { withAuth0 } from '@auth0/auth0-react';
 import Profile from './Profile'
 import BestBooks from './BestBooks'
+import LogoutButton from './LogoutButton';
 import Login from './Login';
-
+// import BrowserRouter from './BrowserRouter';
 
 class App extends React.Component {
   
   render() {
+    const{user, isAuthenticated}=this.props.auth0
+    
     // console.log('app', this.props);
     return (
       
       <>
         <Router>
-          {/* <IsLoadingAndError> */}
+          <IsLoadingAndError>
             <Header />
             <Switch>
               <Route exact path="/">
@@ -37,7 +40,8 @@ class App extends React.Component {
               <Route path="/profile">{this.props.auth0.isAuthenticated && <Profile/> }</Route>
             </Switch>
             <Footer />
-          {/* </IsLoadingAndError> */}
+          </IsLoadingAndError>
+          {/* <Profile/> */}
         </Router>
       </>
     );

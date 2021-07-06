@@ -12,7 +12,7 @@ import {
 import { withAuth0 } from '@auth0/auth0-react';
 import Profile from './Profile'
 import BestBooks from './BestBooks'
-import Login from './Login';
+import Login from './components/Login';
 
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
       
       <>
         <Router>
-          {/* <IsLoadingAndError> */}
+          <IsLoadingAndError>
             <Header />
             <Switch>
               <Route exact path="/">
@@ -37,7 +37,7 @@ class App extends React.Component {
               <Route path="/profile">{this.props.auth0.isAuthenticated && <Profile/> }</Route>
             </Switch>
             <Footer />
-          {/* </IsLoadingAndError> */}
+          </IsLoadingAndError>
         </Router>
       </>
     );

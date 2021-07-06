@@ -52,7 +52,7 @@ class MyFavoriteBooks extends React.Component {
         {
           this.state.listOfBook.map(book =>{
             return <>
-             <li>{book.name},{book.description},{book.status}</li>
+             <li>{book.name}</li>
             </>
           })
         }

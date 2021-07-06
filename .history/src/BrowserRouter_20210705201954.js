@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withAuth0 } from '@auth0/auth0-react';
 import BestBooks from './BestBooks';
-import LoginButton from './LoginButton';
-import Profile from './Profile'
+import LoginButton from './components/LoginButton';
+import Profile from './components/Profile'
 
 
 import {
