@@ -5,7 +5,6 @@ import './BestBooks.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import BookFormModal from './BookFormModal';
 class MyFavoriteBooks extends React.Component {
-
   render() {
     return (
       <Jumbotron>
