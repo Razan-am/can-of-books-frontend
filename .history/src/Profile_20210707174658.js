@@ -4,15 +4,15 @@ import axios from 'axios';
 
 
 class Profile extends Component {
-    componentDidMount = async() => {
+    componentDidMount = () => {
         if (this.props.auth0.isAuthenticated) {
             this.props.auth0.getIdTokenClaims()
-                .then(async(res) => {
-                    const jwt = await res.__raw;
+                .then(res => {
+                    const jwt = res.__raw;
                     const config = {
                         headers: { "Authorization": `Bearer ${jwt}`,"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": true, 'Content-Type': 'application/json', 'mode': 'no-cors' },
                         method: 'get',
-                        baseURL: 'http://localhost:8000',
+                        baseURL: 'http://localhost:8080',
                         url: '/authorize'
                     }
                     axios(config)
