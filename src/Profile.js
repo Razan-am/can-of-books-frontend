@@ -4,24 +4,40 @@ import axios from 'axios';
 
 
 class Profile extends Component {
+
     componentDidMount = async() => {
+        console.log('this.props.auth0.isAuthenticated',this.props.auth0.isAuthenticated)
         if (this.props.auth0.isAuthenticated) {
             this.props.auth0.getIdTokenClaims()
-                .then(res => {
-                    const jwt = res.__raw;
+                .then(async (res) => {
+                    const   jwt =await res.__raw;
                     const config = {
-                        headers: { "Authorization": `Bearer ${jwt}` },
+                        headers: { "Authorization": `Bearer ${jwt}`, "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Credentials": true,
+                        'Content-Type': 'application/json',
+                        'mode': 'no-cors' },
+
                         method: 'get',
                         baseURL: 'http://localhost:8080',
                         url: '/authorize'
                     }
                     axios(config)
                         .then(axiosResults => console.log(axiosResults.data))
-                        .catch(err => console.error(err));
+                        // .catch(err => console.log('first catch',err));
+                        
+
+
+
+
                 })
-                .catch(err => console.error(err));
+                // .catch(err =>console.log('seceund catch',err));
+
+
+                
         }
     }
+
+
     render() {
         return (
             <div>

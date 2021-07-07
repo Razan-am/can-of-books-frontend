@@ -20,25 +20,48 @@ class MyFavoriteBooks extends React.Component {
 
 
 
-  componentDidMount = async() => {
-    if (this.props.auth0.isAuthenticated) {
-      this.props.auth0.getIdTokenClaims()
-        .then(res => {
-          const jwt = res.__raw;
-          const config = {
-            headers: { "Authorization": `Bearer ${jwt}` },
-            method: 'get',
-            baseURL: 'http://localhost:8080',
-            url: '/authorize'
-          }
-          axios(config)
-            .then(axiosResults => console.log(axiosResults.data))
-            .catch(err => console.error(err));
-        })
-        .catch(err => console.error(err));
-    }
-  }
+  // componentDidMount = async() => {
+  //   if (this.props.auth0.isAuthenticated) {
+  //     this.props.auth0.getIdTokenClaims()
+  //       .then(res => {
+  //         const jwt = res.__raw;
+  //         const config = {
+  //           headers: { "Authorization": `Bearer ${jwt}` },
+  //           method: 'get',
+  //           baseURL: 'http://localhost:8080',
+  //           url: '/authorize'
+  //         }
+  //         axios(config)
+  //           .then(axiosResults => console.log(axiosResults.data))
+  //           .catch(err => console.error(err));
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
+  // }
+
+
+
   componentDidMount = () => {
+
+  //       if (this.props.auth0.isAuthenticated) {
+  //     this.props.auth0.getIdTokenClaims()
+  //       .then(res => {
+  //         const jwt = res.__raw;
+  //         const config = {
+  //           headers: { "Authorization": `Bearer ${jwt}` },
+  //           method: 'get',
+  //           baseURL: 'http://localhost:8080',
+  //           url: '/authorize'
+  //         }
+
+
+  //         console.log('jwt cons',jwt)
+  //         axios(config)
+  //           .then(axiosResults => console.log(axiosResults.data))
+  //           .catch(err => console.error(err));
+  //       })
+  //       .catch(err => console.error(err));
+  //   }
 
     let email=this.props.auth0.user.email
     const url=`http://localhost:8080/books?email=${email}`;
