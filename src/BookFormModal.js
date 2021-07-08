@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { Card,Button } from 'react-bootstrap';
+import Update from './Update';
 
 class BookFormModal extends Component {
     constructor(props) {
@@ -14,8 +15,8 @@ class BookFormModal extends Component {
             newNameBook: '',
             newDescriptionBook: '',
             newStatusBook: '',
-            url: '',
-            book_idx: ''
+          
+         
 
         }
     }
@@ -38,13 +39,16 @@ class BookFormModal extends Component {
         // }
 
         let email = this.props.auth0.user.email
+        console.log('email',email)
         const url = `http://localhost:8080/books?email=${email}`;
         axios.get(url).then(response => {
-            console.log('previous data', response.data);
+            console.log('previous data', response);
             this.setState({
                 listOfBook: response.data
             })
         })
+
+    
     }
 
 
@@ -57,7 +61,7 @@ class BookFormModal extends Component {
 
 
         })
-        // console.log('insetName', e.target.value)
+        console.log('insetName', e.target.value)
     }
     insertDescription = (e) => {
         (e).preventDefault();
@@ -76,30 +80,7 @@ class BookFormModal extends Component {
 
 
     }
-    // deleteOne=(e)=>{
-    //     e.preventDefault()
-    //     this.setState({
-    //         youCanDelete:e.target.value,
 
-
-
-    //     })
-    // }
-
-
-
-
-
-
-
-
-    // createBook = (e) => {
-    //     this.setState({
-    //         name: this.state.newNameBook,
-    //         description: this.state.newDescriptionBook,
-    //         status: this.state.newStatusBook,
-    //     })
-    // }
     addBook = (e) => {
         e.preventDefault()
         try {
@@ -126,7 +107,6 @@ class BookFormModal extends Component {
 
 
     deleteBook = (book_idx) => {
-
         axios.delete(`http://localhost:8080/books/${book_idx}/?email=${this.props.auth0.user.email}`).then(res => {
             this.setState({
                 listBook: res.data
@@ -136,112 +116,27 @@ class BookFormModal extends Component {
 
 
 
-    // deleteBook =  (book_idx => {
-
-    //     try{
-    //     let email = (this.props.auth0.user.email)
-    //     const url =  (`http://localhost:8080/books/${book_idx}/?email=${email}`)
-
-    //     .then(axios.delete(url).catch(res => {
-    //         // this.setState({
-    //         //     listOfBook:res.data
-    //         // })
-    //         // console.log('delete');
-    //     }))
-    //   }catch{
-    //     console.log('what happend??!')
-
-    //   }
-    // })
-
-    // nowDeleteBook=async(book_idx)=>{
-    //     try{
-    //         e.preventDefault()
-    //         let email = this.props.auth0.user.email,
-    //         // let urlForDelete = `http://localhost:8080/books/${book_idx}/?email=${email}`,
-
-    //     //    let deleteThe =await axios.delete(`http://localhost:8080/books/${book_idx}/?email=${email}`),
-    //        let weatherGet = await axios.get(weatherUrl).then(response => {
-
-    //         this.setState({
-    //             weather: response.data,
-    //             show: true})
-    //     }
-    //     catch {
-    //         // this.setState({
-    //         //     error: 'can not deleted bz the status is active '
-    //         // });
-    //         console.log('what happend')
-
-    //     }
+    updateBook= async (e,book_idx)=>{
+        e.preventDefault();
+        // console.log(index);
+        // const user=this.props.auth0;
+        const reqBody={
+          name: this.state.newNameBook,
+          description:this.state.newDescriptionBook,
+          status:this.state.newStatusBook,
+          email:this.props.auth0.user.email
+        }
+        console.log(reqBody);
+        const updateBookURL=await axios.put(`http://localhost:8080/update-books/${book_idx}`,reqBody);
+        console.log(updateBookURL.data);
+        this.setState({
+            listOfBook:updateBookURL.data
+        })
+      }
 
 
-
-
-    // }
-
-
-
-    //   deleteOne=(book_idx)=>{
-    //     // e.preventDefault();
-
-    //     // this.setState({
-    //     //     youCanDelete:e.target.value,
-
-
-
-    //     // })
-    //     let email = this.props.auth0.user.email;
-    //     const url = `http://localhost:8000/books/${book_idx}/?email=${email}`;
-
-    //     axios.delete(url).then(res => {
-    //         // this.setState({
-    //         //     listOfBook:res.data
-    //         // })
-    //         // console.log('delete');
-    //     })
-    // }
-
-    // deleteBook = (book_idx => {
-    //     let email = this.props.auth0.user.email;
-    //     const url = `http://localhost:8000/books/${book_idx}/?email=${email}`;
-
-    //     axios.delete(url).then(res => {
-    //         // this.setState({
-    //         //     listOfBook:res.data
-    //         // })
-    //         // console.log('delete');
-    //     })
-    // })
-
-
-    // deleteBook = (book_idx => {
-    //     let email = this.props.auth0.user.email
-    //     const url = `http://localhost:8000/books/${book_idx}/?email=${email}`
-
-    //     axios.delete(url).then(res => {
-    //         // this.setState({
-    //         //     listOfBook:res.data
-    //         // })
-    //         // console.log('delete');
-    //     })
-    // })
-
-
-
-    // deleteBook = (book_idx => {
-    //     let email = this.props.auth0.user.email
-    //     const url = `http://localhost:8000/books/${book_idx}/?email=${email}`
-
-    //     axios.delete(url).then(res => {
-    //         // this.setState({
-    //         //     listOfBook:res.data
-    //         // })
-    //         // console.log('delete');
-    //     })
-    // })
-
-
+   
+    
 
 
     render() {
@@ -274,10 +169,19 @@ class BookFormModal extends Component {
                                         <Card.Text>
                                         Status: {book.status}
                                         </Card.Text>
-                                    </Card.Body>
-                                </Card>
+
+
+
                                 <Button variant="danger" onClick={() => this.deleteBook(index)}>Delete Book</Button>
-                                {/* <button onClick={() => this.deleteBook(index)}></button> */}
+
+                            <Update key={index} id={index} insetName={this.insetName} insertDescription={this.insertDescription} insertStatus={this.insertStatus} updateBook={this.updateBook } book_id={index} newNameBook={book.name} newDescriptionBook={book.description}  newStatusBook={book.status}/>
+                                    
+                                        
+                                        </Card.Body>
+                                </Card> 
+                              <br />
+                                <br />
+
                             </>
                         })
                     }
